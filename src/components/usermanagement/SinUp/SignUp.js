@@ -1,67 +1,71 @@
 import React, {Component} from "react";
 import "./SignUp.css"
+import {Button, Form, Input} from "antd";
+import {signup} from "../../../util/ApiUtil";
 
 
-const SignUp =(props)=>{
-        return (
-            <div className="register-form">
-                <form>
-                    <h2 className="text-center">Zarejestruj się</h2>
+const SignUp = (props) => {
+    const onSubmitted=(values)=>{
+    signup(values).then((response)=>{
+        console.log("Zwrotka rejestracji", response)
+    }).catch((error)=>{
+
+    })
+    }
+
+    return (
+
+        <div className="register">
+            <Form className="register-form"
+                  initialValues={{remember: false}}
+                  onFinish={onSubmitted}>
+                <h2 className="text-center">Zarejestruj się</h2>
+
+                <Form.Item
+                    name="fullName"
+                    rules={[{required: true, message: "Proszę o podanie Imienia i nazwiska"}]}>
+                    <Input size="large"
+                           placeholder="Imie i nazwisko"/>
+                </Form.Item>
+
+                <Form.Item
+                    name="username"
+                    rules={[{required: true, message: "Proszę o podanie nazwy użytkownika"}]}>
+                    <Input size="large"
+                           placeholder="Imie i nazwisko"/>
+                </Form.Item>
+
+                <Form.Item
+                    name="email"
+                    rules={[{required: true, message: "Proszę o podanie adresu e-mail", type: "email"}]}>
+                    <Input size="large"
+                           placeholder="E-mail"/>
+                </Form.Item>
+
+                <Form.Item
+                    name="password"
+                    rules={[{required: true, message: "Proszę o podanie hasła"}]}
+                >
+                    <Input
+                        size="large"
+                        type="password"
+                        placeholder="Hasło"
+                    />
+
+                    <Button
+                        size="large"
+                        htmlType="submit"
+                        className="btn btn-primary register-btn btn-block register-form-button">
+                        Rejestruj
+                    </Button>
+
+                </Form.Item>
+            </Form>
+        </div>
+
+    );
 
 
-                    <div className="form-group">
-                        <div className="input-group">
-                            <div className="input-group-prepend">
-                            </div>
-                            <input type="text" className="form-control" name="username" placeholder="Imię i Nazwisko"
-                                   required="required"/>
-                        </div>
-                    </div>
-
-                    <div className="form-group">
-                        <div className="input-group">
-                            <div className="input-group-prepend">
-                            </div>
-                            <input type="text" className="form-control" name="username" placeholder="Nick"
-                                   required="required"/>
-                        </div>
-                    </div>
-
-
-                    <div className="form-group">
-                        <div className="input-group">
-                            <div className="input-group-prepend">
-                            </div>
-                            <input type="email" className="form-control" placeholder="Adres E-mail"/>
-                        </div>
-                    </div>
-
-
-                    <div className="form-group">
-                        <div className="input-group">
-                            <div className="input-group-prepend">
-                            </div>
-                            <input type="password" className="form-control" name="password" placeholder="Hasło"
-                                   required="required"/>
-                        </div>
-                    </div>
-
-                    <div className="form-group">
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="gridCheck"/>
-                                <label className="form-check-label" htmlFor="gridCheck">
-                                    Włącz dwuetapową rejestrację
-                                </label>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <button type="submit" className="btn btn-primary register-btn btn-block">Zarejestruj</button>
-                    </div>
-                </form>
-            </div>
-        );
-
-        
 }
 
 export default SignUp;

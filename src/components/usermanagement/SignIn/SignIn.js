@@ -4,11 +4,6 @@ import {faUser, faLock} from "@fortawesome/free-solid-svg-icons";
 import {Form, Input, Button, notification} from "antd";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {login} from "../../../util/ApiUtil";
-import {
-    UserOutlined,
-    LockOutlined,
-    DingtalkOutlined,
-} from "@ant-design/icons";
 
 const SignIn = (props) => {
 
@@ -24,7 +19,7 @@ const SignIn = (props) => {
     const onSubmitted = (values) => {
 ///setLoading(true)//dorobic loader dla czekania na zwrotke
         login(values).then((response) => {
-            console.log(response)
+            console.log("Zwrotka loginu",response)
             if (response.isTwoFactorAuthentication) {
                 setUsername(values.username);
                 setRedirect("/verify");
@@ -33,7 +28,7 @@ const SignIn = (props) => {
                 props.history.push("/")
             }
         }).catch((error) => {
-            console.log("Blad "+error.status);
+            console.log("Blad ",error.status);
             if (error.status === 401) {
                 notification.error({
                     message: "Błąd",
@@ -50,47 +45,6 @@ const SignIn = (props) => {
 
     }
     return (
-        // <div className="login-form">
-        //     <form onSubmit={onSubmitted}>
-        //         <h2 className="text-center">Zaloguj się</h2>
-        //         <div className="form-group">
-        //             <div className="input-group">
-        //                 <div className="input-group-prepend">
-        //             <span className="input-group-text">
-        //                  <FontAwesomeIcon icon={faUser}/>
-        //             </span>
-        //                 </div>
-        //                 <input type="text" className="form-control" name="username" placeholder="Username"
-        //                        required="required"/>
-        //             </div>
-        //         </div>
-        //         <div className="form-group">
-        //             <div className="input-group">
-        //                 <div className="input-group-prepend">
-        //             <span className="input-group-text">
-        //                  <FontAwesomeIcon icon={faLock}/>
-        //             </span>
-        //                 </div>
-        //                 <input type="password"
-        //                        className="form-control"
-        //                        name="password"
-        //                        placeholder="Password"
-        //                        required="required"
-        //                 />
-        //             </div>
-        //         </div>
-        //         <div className="form-group">
-        //             <button type="submit" className="btn btn-primary login-btn btn-block">Zaloguj</button>
-        //         </div>
-        //         <div className="clearfix">
-        //             <a href="#" className="float-right">Zapomniano hasła?</a>
-        //         </div>
-        //     </form>
-        //     <p className="text-center text-muted small">Nie posiadasz konta? <a href="/register">Zarejestruj
-        //         się!</a></p>
-        // </div>
-        //
-
         <div className="login">
 
             <Form
