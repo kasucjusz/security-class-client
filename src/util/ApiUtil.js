@@ -27,7 +27,7 @@ const request = (options) => {
 
 export function login(loginRequest) {
   return request({
-    url: "http://localhost:8081/signin",
+    url: "http://localhost:8080/api/users/login",
     method: "POST",
     body: JSON.stringify(loginRequest),
   });
@@ -35,7 +35,7 @@ export function login(loginRequest) {
 
 export function verify(verifyRequest) {
   return request({
-    url: "http://localhost:8081/verify",
+    url: "http://localhost:8080/api/users/register",
     method: "POST",
     body: JSON.stringify(verifyRequest),
   });
